@@ -60,6 +60,14 @@ def load_resources():
 
 We have eliminated any string concatenations.
 
-# Docs
+# Installation
+
+Installation is as simple as `pip install cir`
+
+#### Requirements
+
+- Python >= 3.5
+
+# Documentation
 
 [Documentation](https://bill13579.github.io/circumstance/cir/)
