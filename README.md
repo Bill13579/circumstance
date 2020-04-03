@@ -60,59 +60,6 @@ def load_resources():
 
 We have eliminated any string concatenations.
 
-# API
+# Docs
 
-## cir.**cir(path)**
-```python
-  Object representing a folder context
-
-  Typically used in conjunction with "with"
-
-  Example:
-    with cir.cir("path/path/path") as resolve:
-      print(resolve("file"))
-```
-
-### cir.cir.**path**
-```python
-Path represented by a "cir.cir"
-```
-
-### cir.cir.**\_\_enter\_\_**
-### cir.cir.**\_\_exit\_\_**
-```python
-Context manager methods
-```
-
-### cir.cir.**\_\_call\_\_(self, sub="", \*more)**
-```python
-Alias for "cir.cir.resolve"
-```
-
-
-### cir.cir.**resolve(cls, sub="", \*more)**
-```python
-CLASSMETHOD!!!
-Resolve the provided sub-path plus any additional paths with the current context
-```
-
-### cir.**cd(cls, where, \*more)**
-### cir.cir.**cd(cls, where, \*more)**
-```python
-CLASSMETHOD!!
-Go into the specified directory "where" plus any additional paths and return the sub-"cir.cir"
-```
-
-### cir.**working(cls)**
-### cir.cir.**working(cls)**
-```python
-CLASSMETHOD!!
-Go into the current working directory and return the "cir.cir"(basically the context)
-```
-
-### cir.**me(cls)**
-### cir.cir.**me(cls)**
-```python
-CLASSMETHOD!!
-Go into the parent directory of the calling function's module file and return the "cir.cir"(basically the context)
-```
+[Documentation](https://bill13579.github.io/circumstance/cir/)
