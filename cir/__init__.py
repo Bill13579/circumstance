@@ -75,9 +75,9 @@ class cir:
 
     Example:
     ```python
-      # In practice, use "cir.cd", "cir.working", or "cir.me"
-      with cir.cir("path/") as resolve:
-        print(resolve("file"))
+    # In practice, it is recommended to use "cir.cd", "cir.working", or "cir.me" instead of this
+    with cir.cir("path/") as resolve:
+      print(resolve("file"))
     ```
     """
     _active_group = threading.local()
@@ -124,14 +124,14 @@ class cir:
 
         Example:
         ```python
-          # Used independently
-          with cir.cd("/home") as home_:
-            print(home_("tom"))  # Output: /home/tom
+        # Used independently
+        with cir.cd("/home") as home_:
+          print(home_("tom"))  # Output: /home/tom
         
-          # Used in conjunction with "cir.me"
-          with cir.me() as here_:
-            with cir.cd("resources") as res_:
-              print(res_("example.png"))  # Output: <folder where the calling file resides>/resources/example.png
+        # Used in conjunction with "cir.me"
+        with cir.me() as here_:
+          with cir.cd("resources") as res_:
+            print(res_("example.png"))  # Output: <folder where the calling file resides>/resources/example.png
         ```
         """
         return cls(os.path.join(where, *more))
@@ -143,8 +143,8 @@ class cir:
 
         Example:
         ```python
-          with cir.working() as working_:
-            print(working_("example.png"))  # Output: <working directory>/example.png
+        with cir.working() as working_:
+          print(working_("example.png"))  # Output: <working directory>/example.png
         ```
         """
         return cls(os.getcwd())
@@ -156,8 +156,8 @@ class cir:
         
         Example:
         ```python
-          with cir.me() as here_:
-            print(here_("example.png"))  # Output: <folder where the calling file resides>/example.png
+        with cir.me() as here_:
+          print(here_("example.png"))  # Output: <folder where the calling file resides>/example.png
         ```
         """
         return cls(os.path.abspath(os.path.dirname(inspect.stack()[1].filename)))
