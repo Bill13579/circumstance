@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.7.5" />
+<title>cir API documentation</title>
+<meta name="description" content="What is Circumstance? …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>cir</code></h1>
+</header>
+<section id="section-intro">
+<h1 id="what-is-circumstance">What is Circumstance?</h1>
+<p>In Python, when you're trying to deal with multiple nested directories, there's one problem that can make your code harder to understand: The Concat Hell.</p>
+<p>For example, if I have my config files and folders setup like this:</p>
+<pre><code>app
+├── app.log
+├── config.json
+├── icons
+│   ├── add.ico
+│   ├── divide.ico
+│   ├── multiply.ico
+│   └── subtract.ico
+└── logo
+    ├── 128.ico
+    ├── 32.ico
+    └── 64.ico
+</code></pre>
+<p>To load all of them using <strong>Just Python</strong>:</p>
+<pre><code class="python">### Just Python
+def load_resources():
+    ROOT = os.path.abspath(os.path.dirname(__file__))
+    config = load_config(ROOT + &quot;/config.json&quot;)
+    logos = {
+        32: load_image(ROOT + &quot;/logo/32.ico&quot;),
+        64: load_image(ROOT + &quot;/logo/64.ico&quot;),
+        128: load_image(ROOT + &quot;/logo/128.ico&quot;)
+    }
+    add_icon = load_icon(ROOT + &quot;/icons/add.ico&quot;)
+    divide_icon = load_icon(ROOT + &quot;/icons/divide.ico&quot;)
+    multiply_icon = load_icon(ROOT + &quot;/icons/multiply.ico&quot;)
+    subtract_icon = load_icon(ROOT + &quot;/icons/subtract.ico&quot;)
+    logger.setPath(ROOT + &quot;/app.log&quot;)
+</code></pre>
+<p>As you can see, there's <strong><em>a lot</em></strong> of string concatenations! Not only that, if we forget what <code>ROOT</code> represents, we might get buggy code! </p>
+<p>To load all of them using <strong>Circumstance</strong>:</p>
+<pre><code class="python">### Using Circumstance
+def load_resources():
+    with cir.me() as root_:
+        config = load_config(root_(&quot;config.json&quot;))
+        with root_.cd(&quot;logo&quot;) as logos_:
+            logos = {
+                32: load_image(logos_(&quot;32.ico&quot;)),
+                64: load_image(logos_(&quot;64.ico&quot;)),
+                128: load_image(logos_(&quot;128.ico&quot;))
+            }
+        with root_.cd(&quot;icons&quot;) as icons_:
+            add_icon = load_icon(icons_(&quot;add.ico&quot;))
+            divide_icon = load_icon(icons_(&quot;divide.ico&quot;))
+            multiply_icon = load_icon(icons_(&quot;multiply.ico&quot;))
+            subtract_icon = load_icon(icons_(&quot;subtract.ico&quot;))
+        logger.setPath(root_(&quot;app.log&quot;))
+</code></pre>
+<p>We have eliminated any string concatenations.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+# What is Circumstance?
+
+In Python, when you&#39;re trying to deal with multiple nested directories, there&#39;s one problem that can make your code harder to understand: The Concat Hell.
+
+For example, if I have my config files and folders setup like this:
+```
+app
+├── app.log
+├── config.json
+├── icons
+│   ├── add.ico
+│   ├── divide.ico
+│   ├── multiply.ico
+│   └── subtract.ico
+└── logo
+    ├── 128.ico
+    ├── 32.ico
+    └── 64.ico
+```
+
+To load all of them using **Just Python**:
+```python
+### Just Python
+def load_resources():
+    ROOT = os.path.abspath(os.path.dirname(__file__))
+    config = load_config(ROOT + &#34;/config.json&#34;)
+    logos = {
+        32: load_image(ROOT + &#34;/logo/32.ico&#34;),
+        64: load_image(ROOT + &#34;/logo/64.ico&#34;),
+        128: load_image(ROOT + &#34;/logo/128.ico&#34;)
+    }
+    add_icon = load_icon(ROOT + &#34;/icons/add.ico&#34;)
+    divide_icon = load_icon(ROOT + &#34;/icons/divide.ico&#34;)
+    multiply_icon = load_icon(ROOT + &#34;/icons/multiply.ico&#34;)
+    subtract_icon = load_icon(ROOT + &#34;/icons/subtract.ico&#34;)
+    logger.setPath(ROOT + &#34;/app.log&#34;)
+```
+
+As you can see, there&#39;s ***a lot*** of string concatenations! Not only that, if we forget what `ROOT` represents, we might get buggy code! 
+
+To load all of them using **Circumstance**:
+```python
+### Using Circumstance
+def load_resources():
+    with cir.me() as root_:
+        config = load_config(root_(&#34;config.json&#34;))
+        with root_.cd(&#34;logo&#34;) as logos_:
+            logos = {
+                32: load_image(logos_(&#34;32.ico&#34;)),
+                64: load_image(logos_(&#34;64.ico&#34;)),
+                128: load_image(logos_(&#34;128.ico&#34;))
+            }
+        with root_.cd(&#34;icons&#34;) as icons_:
+            add_icon = load_icon(icons_(&#34;add.ico&#34;))
+            divide_icon = load_icon(icons_(&#34;divide.ico&#34;))
+            multiply_icon = load_icon(icons_(&#34;multiply.ico&#34;))
+            subtract_icon = load_icon(icons_(&#34;subtract.ico&#34;))
+        logger.setPath(root_(&#34;app.log&#34;))
+```
+
+We have eliminated any string concatenations.
+&#34;&#34;&#34;
+
+import os
+import threading
+import inspect
+
+class cir:
+    &#34;&#34;&#34;
+    Object representing a folder context
+    
+    Typically instantiated indirectly using `cir.cd`, `cir.working`, or `cir.me`.
+    Typically used in conjunction with &#34;with&#34;
+
+    Example:
+    ```python
+    # In practice, it is recommended to use &#34;cir.cd&#34;, &#34;cir.working&#34;, or &#34;cir.me&#34; instead of this
+    with cir.cir(&#34;/path/path2&#34;) as resolve:
+      print(resolve(&#34;file&#34;))  # Output: /path/path2/file
+    ```
+    &#34;&#34;&#34;
+    _active_group = threading.local()
+    
+    def __init__(self, path):
+        &#34;&#34;&#34;Initializes a new folder context&#34;&#34;&#34;
+        super().__init__()
+        self.__p = path
+    
+    @property
+    def path(self):
+        &#34;&#34;&#34;Path represented by the `cir` instance&#34;&#34;&#34;
+        return self.__p
+    
+    def __enter__(self):
+        if not hasattr(cir._active_group, &#39;current&#39;):
+            cir._active_group.current = []
+        stack = cir._active_group.current
+        cir._active_group.current.append(self)
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        last = cir._active_group.current.pop()
+        assert last == self, &#34;Context managers being exited out of order&#34;
+    
+    def __call__(self, sub=&#34;&#34;, *more):
+        &#34;&#34;&#34;
+        (Alias for cir.resolve)
+        Resolve the provided sub-path `sub` plus any additional paths `*more`, using the current context
+        &#34;&#34;&#34;
+        return cir.resolve(sub, *more)
+
+    @classmethod
+    def resolve(cls, sub=&#34;&#34;, *more):
+        &#34;&#34;&#34;
+        Resolve the provided sub-path `sub` plus any additional paths `*more`, using the current context
+        
+        NOTE: Consider using `__call__(sub=&#34;&#34;, *more)`(in other words`&lt;instance of cir&gt;(sub=&#34;&#34;, *more)`) instead.
+        &#34;&#34;&#34;
+        return os.path.normpath(os.path.join(*[i.path for i in cls._active_group.current], sub, *more))
+
+    @classmethod
+    def cd(cls, where, *more):
+        &#34;&#34;&#34;
+        Go into the specified directory `where` plus any additional paths `*more`, and return the sub-`cir.cir`
+
+        Example:
+        ```python
+        # Used independently
+        with cir.cd(&#34;/home&#34;) as home_:
+          print(home_(&#34;tom&#34;))  # Output: /home/tom
+        
+        # Used in conjunction with &#34;cir.me&#34;
+        with cir.me() as here_:
+          with cir.cd(&#34;resources&#34;) as res_:
+            print(res_(&#34;example.png&#34;))  # Output: &lt;folder where I reside&gt;/resources/example.png
+        ```
+        &#34;&#34;&#34;
+        return cls(os.path.join(where, *more))
+
+def working():
+    &#34;&#34;&#34;
+    Go into the current working directory and return a new context of type `cir.cir`
+
+    Example:
+    ```python
+    with cir.working() as working_:
+        print(working_(&#34;example.png&#34;))  # Output: &lt;working directory&gt;/example.png
+    ```
+    &#34;&#34;&#34;
+    return cir(os.getcwd())
+
+def me():
+    &#34;&#34;&#34;
+    Go into the parent directory of the calling function&#39;s file and return a new context of type `cir.cir`
+    
+    Example:
+    ```python
+    with cir.me() as here_:
+        print(here_(&#34;example.png&#34;))  # Output: &lt;folder where I reside&gt;/example.png
+    ```
+    &#34;&#34;&#34;
+    return cir(os.path.abspath(os.path.dirname(inspect.stack()[1].filename)))
+
+cd = cir.cd</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="cir.cd"><code class="name flex">
+<span>def <span class="ident">cd</span></span>(<span>where, *more)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Go into the specified directory <code>where</code> plus any additional paths <code>*more</code>, and return the sub-<a title="cir.cir" href="#cir.cir"><code>cir</code></a></p>
+<p>Example:</p>
+<pre><code class="python"># Used independently
+with cir.cd(&quot;/home&quot;) as home_:
+  print(home_(&quot;tom&quot;))  # Output: /home/tom
+
+# Used in conjunction with &quot;cir.me&quot;
+with cir.me() as here_:
+  with cir.cd(&quot;resources&quot;) as res_:
+    print(res_(&quot;example.png&quot;))  # Output: &lt;folder where I reside&gt;/resources/example.png
+</code></pre></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def cd(cls, where, *more):
+    &#34;&#34;&#34;
+    Go into the specified directory `where` plus any additional paths `*more`, and return the sub-`cir.cir`
+
+    Example:
+    ```python
+    # Used independently
+    with cir.cd(&#34;/home&#34;) as home_:
+      print(home_(&#34;tom&#34;))  # Output: /home/tom
+    
+    # Used in conjunction with &#34;cir.me&#34;
+    with cir.me() as here_:
+      with cir.cd(&#34;resources&#34;) as res_:
+        print(res_(&#34;example.png&#34;))  # Output: &lt;folder where I reside&gt;/resources/example.png
+    ```
+    &#34;&#34;&#34;
+    return cls(os.path.join(where, *more))</code></pre>
+</details>
+</dd>
+<dt id="cir.me"><code class="name flex">
+<span>def <span class="ident">me</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Go into the parent directory of the calling function's file and return a new context of type <a title="cir.cir" href="#cir.cir"><code>cir</code></a></p>
+<p>Example:</p>
+<pre><code class="python">with cir.me() as here_:
+    print(here_(&quot;example.png&quot;))  # Output: &lt;folder where I reside&gt;/example.png
+</code></pre></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def me():
+    &#34;&#34;&#34;
+    Go into the parent directory of the calling function&#39;s file and return a new context of type `cir.cir`
+    
+    Example:
+    ```python
+    with cir.me() as here_:
+        print(here_(&#34;example.png&#34;))  # Output: &lt;folder where I reside&gt;/example.png
+    ```
+    &#34;&#34;&#34;
+    return cir(os.path.abspath(os.path.dirname(inspect.stack()[1].filename)))</code></pre>
+</details>
+</dd>
+<dt id="cir.working"><code class="name flex">
+<span>def <span class="ident">working</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Go into the current working directory and return a new context of type <a title="cir.cir" href="#cir.cir"><code>cir</code></a></p>
+<p>Example:</p>
+<pre><code class="python">with cir.working() as working_:
+    print(working_(&quot;example.png&quot;))  # Output: &lt;working directory&gt;/example.png
+</code></pre></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def working():
+    &#34;&#34;&#34;
+    Go into the current working directory and return a new context of type `cir.cir`
+
+    Example:
+    ```python
+    with cir.working() as working_:
+        print(working_(&#34;example.png&#34;))  # Output: &lt;working directory&gt;/example.png
+    ```
+    &#34;&#34;&#34;
+    return cir(os.getcwd())</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="cir.cir"><code class="flex name class">
+<span>class <span class="ident">cir</span></span>
+<span>(</span><span>path)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Object representing a folder context</p>
+<p>Typically instantiated indirectly using <a title="cir.cd" href="#cir.cd"><code>cir.cd()</code></a>, <a title="cir.working" href="#cir.working"><code>working()</code></a>, or <a title="cir.me" href="#cir.me"><code>me()</code></a>.
+Typically used in conjunction with "with"</p>
+<p>Example:</p>
+<pre><code class="python"># In practice, it is recommended to use &quot;cir.cd&quot;, &quot;cir.working&quot;, or &quot;cir.me&quot; instead of this
+with cir.cir(&quot;/path/path2&quot;) as resolve:
+  print(resolve(&quot;file&quot;))  # Output: /path/path2/file
+</code></pre>
+<p>Initializes a new folder context</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class cir:
+    &#34;&#34;&#34;
+    Object representing a folder context
+    
+    Typically instantiated indirectly using `cir.cd`, `cir.working`, or `cir.me`.
+    Typically used in conjunction with &#34;with&#34;
+
+    Example:
+    ```python
+    # In practice, it is recommended to use &#34;cir.cd&#34;, &#34;cir.working&#34;, or &#34;cir.me&#34; instead of this
+    with cir.cir(&#34;/path/path2&#34;) as resolve:
+      print(resolve(&#34;file&#34;))  # Output: /path/path2/file
+    ```
+    &#34;&#34;&#34;
+    _active_group = threading.local()
+    
+    def __init__(self, path):
+        &#34;&#34;&#34;Initializes a new folder context&#34;&#34;&#34;
+        super().__init__()
+        self.__p = path
+    
+    @property
+    def path(self):
+        &#34;&#34;&#34;Path represented by the `cir` instance&#34;&#34;&#34;
+        return self.__p
+    
+    def __enter__(self):
+        if not hasattr(cir._active_group, &#39;current&#39;):
+            cir._active_group.current = []
+        stack = cir._active_group.current
+        cir._active_group.current.append(self)
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        last = cir._active_group.current.pop()
+        assert last == self, &#34;Context managers being exited out of order&#34;
+    
+    def __call__(self, sub=&#34;&#34;, *more):
+        &#34;&#34;&#34;
+        (Alias for cir.resolve)
+        Resolve the provided sub-path `sub` plus any additional paths `*more`, using the current context
+        &#34;&#34;&#34;
+        return cir.resolve(sub, *more)
+
+    @classmethod
+    def resolve(cls, sub=&#34;&#34;, *more):
+        &#34;&#34;&#34;
+        Resolve the provided sub-path `sub` plus any additional paths `*more`, using the current context
+        
+        NOTE: Consider using `__call__(sub=&#34;&#34;, *more)`(in other words`&lt;instance of cir&gt;(sub=&#34;&#34;, *more)`) instead.
+        &#34;&#34;&#34;
+        return os.path.normpath(os.path.join(*[i.path for i in cls._active_group.current], sub, *more))
+
+    @classmethod
+    def cd(cls, where, *more):
+        &#34;&#34;&#34;
+        Go into the specified directory `where` plus any additional paths `*more`, and return the sub-`cir.cir`
+
+        Example:
+        ```python
+        # Used independently
+        with cir.cd(&#34;/home&#34;) as home_:
+          print(home_(&#34;tom&#34;))  # Output: /home/tom
+        
+        # Used in conjunction with &#34;cir.me&#34;
+        with cir.me() as here_:
+          with cir.cd(&#34;resources&#34;) as res_:
+            print(res_(&#34;example.png&#34;))  # Output: &lt;folder where I reside&gt;/resources/example.png
+        ```
+        &#34;&#34;&#34;
+        return cls(os.path.join(where, *more))</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="cir.cir.cd"><code class="name flex">
+<span>def <span class="ident">cd</span></span>(<span>where, *more)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Go into the specified directory <code>where</code> plus any additional paths <code>*more</code>, and return the sub-<a title="cir.cir" href="#cir.cir"><code>cir</code></a></p>
+<p>Example:</p>
+<pre><code class="python"># Used independently
+with cir.cd(&quot;/home&quot;) as home_:
+  print(home_(&quot;tom&quot;))  # Output: /home/tom
+
+# Used in conjunction with &quot;cir.me&quot;
+with cir.me() as here_:
+  with cir.cd(&quot;resources&quot;) as res_:
+    print(res_(&quot;example.png&quot;))  # Output: &lt;folder where I reside&gt;/resources/example.png
+</code></pre></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def cd(cls, where, *more):
+    &#34;&#34;&#34;
+    Go into the specified directory `where` plus any additional paths `*more`, and return the sub-`cir.cir`
+
+    Example:
+    ```python
+    # Used independently
+    with cir.cd(&#34;/home&#34;) as home_:
+      print(home_(&#34;tom&#34;))  # Output: /home/tom
+    
+    # Used in conjunction with &#34;cir.me&#34;
+    with cir.me() as here_:
+      with cir.cd(&#34;resources&#34;) as res_:
+        print(res_(&#34;example.png&#34;))  # Output: &lt;folder where I reside&gt;/resources/example.png
+    ```
+    &#34;&#34;&#34;
+    return cls(os.path.join(where, *more))</code></pre>
+</details>
+</dd>
+<dt id="cir.cir.resolve"><code class="name flex">
+<span>def <span class="ident">resolve</span></span>(<span>sub='', *more)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Resolve the provided sub-path <code>sub</code> plus any additional paths <code>*more</code>, using the current context</p>
+<p>NOTE: Consider using <code>__call__(sub="", *more)</code>(in other words<code>&lt;instance of cir&gt;(sub="", *more)</code>) instead.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def resolve(cls, sub=&#34;&#34;, *more):
+    &#34;&#34;&#34;
+    Resolve the provided sub-path `sub` plus any additional paths `*more`, using the current context
+    
+    NOTE: Consider using `__call__(sub=&#34;&#34;, *more)`(in other words`&lt;instance of cir&gt;(sub=&#34;&#34;, *more)`) instead.
+    &#34;&#34;&#34;
+    return os.path.normpath(os.path.join(*[i.path for i in cls._active_group.current], sub, *more))</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="cir.cir.path"><code class="name">var <span class="ident">path</span></code></dt>
+<dd>
+<section class="desc"><p>Path represented by the <a title="cir.cir" href="#cir.cir"><code>cir</code></a> instance</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def path(self):
+    &#34;&#34;&#34;Path represented by the `cir` instance&#34;&#34;&#34;
+    return self.__p</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul>
+<li><a href="#what-is-circumstance">What is Circumstance?</a></li>
+</ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="cir.cd" href="#cir.cd">cd</a></code></li>
+<li><code><a title="cir.me" href="#cir.me">me</a></code></li>
+<li><code><a title="cir.working" href="#cir.working">working</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="cir.cir" href="#cir.cir">cir</a></code></h4>
+<ul class="">
+<li><code><a title="cir.cir.cd" href="#cir.cir.cd">cd</a></code></li>
+<li><code><a title="cir.cir.path" href="#cir.cir.path">path</a></code></li>
+<li><code><a title="cir.cir.resolve" href="#cir.cir.resolve">resolve</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.5</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
