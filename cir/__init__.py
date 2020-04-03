@@ -3,9 +3,21 @@ import threading
 import inspect
 
 class cir:
+    """
+    Object representing a folder context
+    
+    Typically used in conjunction with "with"
+
+    Example:
+    ```python
+      with cir.cir("path/") as resolve:
+        print(resolve("file"))
+    ```
+    """
     _active_group = threading.local()
     
     def __init__(self, p):
+        """Initializes a new folder context"""
         super().__init__()
         self.__p = p
     
@@ -25,7 +37,11 @@ class cir:
         assert last == self, "Context managers being exited out of order"
     
     def __call__(self, sub="", *more):
-        return os.path.normpath(os.path.join(*[i.path for i in cir._active_group.current], sub, *more))
+        return cir.resolve(sub="", *more)
+
+    @classmethod
+    def resolve(cls, sub="", *more):
+        return os.path.normpath(os.path.join(*[i.path for i in cls._active_group.current], sub, *more))
 
     @classmethod
     def cd(cls, where, *more):
