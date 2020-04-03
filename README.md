@@ -1,6 +1,6 @@
 # What is this?
 
-In Python, when you're trying to deal with multiple nested directories, there's one problem that makes your code hard to understand: The Concat Hell.
+In Python, when you're trying to deal with multiple nested directories, there's one problem that can make your code harder to understand: The Concat Hell.
 
 For example, if I have my config files and folders setup like this:
 ```
@@ -42,20 +42,20 @@ To load all of them using **Circumstance**:
 ```python
 ### Using Circumstance
 def load_resources():
-    with cir.me() as root:
-        config = load_config(root("config.json"))
-        with root.cd("logo") as logo_path:
+    with cir.me() as root_:
+        config = load_config(root_("config.json"))
+        with root_.cd("logo") as logos_:
             logos = {
-                32: load_image(logo_path("32.ico")),
-                64: load_image(logo_path("64.ico")),
-                128: load_image(logo_path("128.ico"))
+                32: load_image(logos_("32.ico")),
+                64: load_image(logos_("64.ico")),
+                128: load_image(logos_("128.ico"))
             }
-        with root.cd("icons") as icon_path:
-            add_icon = load_icon(icon_path("add.ico"))
-            divide_icon = load_icon(icon_path("divide.ico"))
-            multiply_icon = load_icon(icon_path("multiply.ico"))
-            subtract_icon = load_icon(icon_path("subtract.ico"))
-        logger.setPath(root("app.log"))
+        with root_.cd("icons") as icons_:
+            add_icon = load_icon(icons_("add.ico"))
+            divide_icon = load_icon(icons_("divide.ico"))
+            multiply_icon = load_icon(icons_("multiply.ico"))
+            subtract_icon = load_icon(icons_("subtract.ico"))
+        logger.setPath(root_("app.log"))
 ```
 
 We have eliminated any string concatenations.
