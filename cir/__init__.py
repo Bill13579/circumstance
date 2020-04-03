@@ -76,8 +76,8 @@ class cir:
     Example:
     ```python
     # In practice, it is recommended to use "cir.cd", "cir.working", or "cir.me" instead of this
-    with cir.cir("path/") as resolve:
-      print(resolve("file"))
+    with cir.cir("/path/path2") as resolve:
+      print(resolve("file"))  # Output: /path/path2/file
     ```
     """
     _active_group = threading.local()
@@ -131,7 +131,7 @@ class cir:
         # Used in conjunction with "cir.me"
         with cir.me() as here_:
           with cir.cd("resources") as res_:
-            print(res_("example.png"))  # Output: <folder where the calling file resides>/resources/example.png
+            print(res_("example.png"))  # Output: <folder where I reside>/resources/example.png
         ```
         """
         return cls(os.path.join(where, *more))
@@ -157,7 +157,7 @@ class cir:
         Example:
         ```python
         with cir.me() as here_:
-          print(here_("example.png"))  # Output: <folder where the calling file resides>/example.png
+          print(here_("example.png"))  # Output: <folder where I reside>/example.png
         ```
         """
         return cls(os.path.abspath(os.path.dirname(inspect.stack()[1].filename)))
