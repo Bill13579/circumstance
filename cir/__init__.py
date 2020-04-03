@@ -114,6 +114,8 @@ class cir:
     def resolve(cls, sub="", *more):
         """
         Resolve the provided sub-path `sub` plus any additional paths `*more`, using the current context
+        
+        NOTE: Consider using `__call__(sub="", *more)`(in other words`<instance of cir>(sub="", *more)`) instead.
         """
         return os.path.normpath(os.path.join(*[i.path for i in cls._active_group.current], sub, *more))
 
@@ -136,32 +138,28 @@ class cir:
         """
         return cls(os.path.join(where, *more))
 
-    @classmethod
-    def working(cls):
-        """
-        Go into the current working directory and return a new context of type `cir.cir`
+def working():
+    """
+    Go into the current working directory and return a new context of type `cir.cir`
 
-        Example:
-        ```python
-        with cir.working() as working_:
-          print(working_("example.png"))  # Output: <working directory>/example.png
-        ```
-        """
-        return cls(os.getcwd())
+    Example:
+    ```python
+    with cir.working() as working_:
+        print(working_("example.png"))  # Output: <working directory>/example.png
+    ```
+    """
+    return cir(os.getcwd())
 
-    @classmethod
-    def me(cls):
-        """
-        Go into the parent directory of the calling function's file and return a new context of type `cir.cir`
-        
-        Example:
-        ```python
-        with cir.me() as here_:
-          print(here_("example.png"))  # Output: <folder where I reside>/example.png
-        ```
-        """
-        return cls(os.path.abspath(os.path.dirname(inspect.stack()[1].filename)))
+def me():
+    """
+    Go into the parent directory of the calling function's file and return a new context of type `cir.cir`
+    
+    Example:
+    ```python
+    with cir.me() as here_:
+        print(here_("example.png"))  # Output: <folder where I reside>/example.png
+    ```
+    """
+    return cir(os.path.abspath(os.path.dirname(inspect.stack()[1].filename)))
 
 cd = cir.cd
-working = cir.working
-me = cir.me
