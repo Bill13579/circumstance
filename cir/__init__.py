@@ -37,7 +37,7 @@ class cir:
         assert last == self, "Context managers being exited out of order"
     
     def __call__(self, sub="", *more):
-        return cir.resolve(sub="", *more)
+        return cir.resolve(sub=sub, *more)
 
     @classmethod
     def resolve(cls, sub="", *more):
